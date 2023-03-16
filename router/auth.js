@@ -20,9 +20,7 @@ router.use(cookieParser());
 
 //router.get('/',);
 
-router.get('/', (req, res) => {
-    res.send('hello world');
-});
+
 
 // router.get('/about', (req, res) => {
 //     res.send('hello about router');
