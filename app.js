@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require("dotenv");
+const path =require('path');
+
 
 const app = express();
 
@@ -11,12 +13,20 @@ app.use(express.json());
 //make router file
 app.use(require('./router/auth'));
 
+//for deployment
+app.use(express.static(path.join(__dirname,'./client/build')))
+
+app.use('*',function(req,res){
+res.sendFile(path.join(__dirname,'./client/build/index.html'));
+});
+
+
 //const User= require('./models/userSchema');
 
 //const DB="mongodb+srv://sa:QKRSsh8GS9iXqwwy@mernstack.c33sefp.mongodb.net/test";
 const LDB = "mongodb://localhost:27017/players";
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 //const DB="mongodb+srv://sa:QKRSsh8GS9iXqwwy@mernstack.c33sefp.mongodb.net/mernDB?retryWrites=true&w=majority";
 
